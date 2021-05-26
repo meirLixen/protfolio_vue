@@ -19,12 +19,15 @@
         >
       </div>
     </div>
-    <ScrollToPage2 v-on:scrollToPage2="scrollToPage2" :nameAndProfessionDisplayEnded="nameAndProfessionDisplayEnded"/>
+    <ScrollToPage2
+      v-on:scrollToPage2="scrollToPage2"
+      :nameAndProfessionDisplayEnded="nameAndProfessionDisplayEnded"
+    />
   </div>
 </template>
 
 <script>
-import ScrollToPage2 from "./ScrollToPage2"
+import ScrollToPage2 from "./ScrollToPage2";
 const myName = "My name is Meir Lixenbrg.";
 const myProfession = "a full stack developer.";
 
@@ -56,15 +59,19 @@ export default {
         index++;
       }, 100);
     };
-    stringToArrayByInterval1();
+    setTimeout(() => {
+      stringToArrayByInterval1();
+    }, 1000);
   },
-  
+
   data() {
     return {
       nameAndProfessionDisplayEnded: false,
       name: [],
       profession: [],
-      scrollToPage2: ()=>{this.$emit("scrollToPage2")}
+      scrollToPage2: () => {
+        this.$emit("scrollToPage2");
+      },
     };
   },
 };
@@ -74,7 +81,7 @@ export default {
 .page1 {
   width: 100vw;
   height: 100vh;
-  
+
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -86,7 +93,7 @@ export default {
   background-clip: text;
   background-size: 5px;
   user-select: none;
-  margin-top:  5rem;
+  margin-top: 5rem;
   margin-bottom: 0px;
   /* margin-bottom: 22px; */
 }
@@ -103,7 +110,6 @@ export default {
   user-select: none;
   margin-top: 3rem;
   margin-bottom: 8rem;
-  
 }
 .profession {
   margin-left: 31px;
@@ -123,27 +129,23 @@ export default {
   }
 }
 @media only screen and (max-width: 600px) {
- .name_and_profession{
-width: 33rem;
+  .name_and_profession {
+    width: 33rem;
   }
 }
 
 @media only screen and (min-width: 600px) {
- .name_and_profession{
-width: 32rem;
+  .name_and_profession {
+    width: 32rem;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  
- 
 }
 
 @media only screen and (min-width: 992px) {
-  
 }
 
 @media only screen and (min-width: 1200px) {
-  
 }
 </style>

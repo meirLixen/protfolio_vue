@@ -1,5 +1,5 @@
 <template>
-  <div id="page2" class="page2">
+  <div v-show="page2isVisible" id="page2" class="page2">
     <h1>tech stack</h1>
     <div class="tech_stack">
       <div v-if="array[0]" class="technology vue">Vue.js</div>
@@ -37,6 +37,7 @@ export default {
   methods: {
     scrollToPage2: function() {
       this.array = [];
+      this.page2isVisible = true;
     },
     stringToArrayByInterval1() {
       var myInterval = setInterval(() => {
@@ -51,19 +52,20 @@ export default {
   mounted() {
     // console.log(document.body.scrollHeight);
     // console.log(document.documentElement.scrollHeight);
-
-    const options = this.options || {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.9,
-    };
-    this.observer = new IntersectionObserver((entry) => {
-      if (entry && entry[0].isIntersecting && !IntervalRunning) {
-        IntervalRunning = true;
-        this.stringToArrayByInterval1();
-      }
-    }, options);
-    this.observer.observe(this.$el);
+    if (this.page2isVisible) {
+      const options = this.options || {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.9,
+      };
+      this.observer = new IntersectionObserver((entry) => {
+        if (entry && entry[0].isIntersecting && !IntervalRunning) {
+          IntervalRunning = true;
+          this.stringToArrayByInterval1();
+        }
+      }, options);
+      this.observer.observe(this.$el);
+    }
   },
   watch: {
     array: function() {
@@ -76,6 +78,7 @@ export default {
   },
   data() {
     return {
+      page2isVisible: false,
       array: [],
       observer: null,
     };
@@ -153,11 +156,13 @@ h1 {
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) 
+/* and (min-width: 688px)  */
+{
   .tech_stack {
     transform: scale(1);
     width: 570px;
-
+    /* top: calc(4rem + 9vh); */
     /* left: calc(50vw - 18rem); */
   }
   h1 {

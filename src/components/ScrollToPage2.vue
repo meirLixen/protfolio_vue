@@ -37,9 +37,10 @@ svg {
   width: 18rem;
 }
 @keyframes svg {
-  0% {
-    transform: rotate(180deg);
+  from {
+    transform: rotate(0deg);
   }
+  to{transform: rotate(360deg);}
 }
 .stroke-red {
   r: 9rem;

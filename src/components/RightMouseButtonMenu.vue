@@ -20,6 +20,9 @@
       <span class="keyboard_shortcut">Ctrl+P</span>
       <span class="description_button">הדפסה</span>
     </div>
+    <div class="download_cv" v-on:click="clickDownloadCV">
+      <span class="description_button">הורד קורות חיים</span>
+    </div>
   </div>
 </template>
 
@@ -68,6 +71,12 @@ export default {
     clickPrinting() {
       window.print();
     },
+    clickDownloadCV() {
+      var link = document.createElement("a");
+      link.href = "../../public/meir_cv.pdf";
+      link.download = "meir_cv.pdf";
+      link.dispatchEvent(new MouseEvent("click"));
+    },
     contextMenu(event) {
       event.preventDefault();
       var myVar = 333;
@@ -87,7 +96,7 @@ export default {
   font-family: sans-serif;
   width: 333px;
   z-index: 100;
-  height: 144px;
+  height: 170px;
   background-color: white;
   position: absolute;
   display: none;
@@ -111,6 +120,18 @@ export default {
 .menu .save_as {
   margin-top: 5px;
 }
+.menu .printing {
+  border-bottom: 1px solid;
+  border-color: #00000021;
+}
+.download_cv {
+  margin-top: 5px;
+}
+.download_cv a {
+  text-decoration: none;
+  color: black;
+  cursor: none;
+}
 .menu div .description_button {
   margin-left: auto;
   margin-right: 35px;
@@ -124,4 +145,4 @@ export default {
 </style>
 // document.execCommand("copy"); // document.documentElement.innerHTML; // a
 href="/images/myw3schoolsimage.jpg" download // var userLang =
-navigator.language || navigator.userLanguage;
+navigator.language || navigator.userLanguage; window.open('file.doc')

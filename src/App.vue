@@ -1,40 +1,56 @@
+// :style="{ backgroundImage: 'url(' + getImgUrl('./aaa.png') + ')' }" //
+:style="{ backgroundImage: 'url(' + image + ')' }"
+
 <template>
-  <div
-    class="App"
-    ref="App"
-    v-on="{
-      mousemove: divAppMouseMove,
-      mouseout: divAppMouseOut,
-      contextmenu: divAppContextMenu,
-      click: divAppClick,
-    }"
-  >
-    <!-- <div class="page1"> -->
-    <NameAndProfession v-on:scrollToPage2="scrollToPage2" />
-    <!-- </div> -->
-    <!-- <div class="page2"> -->
-    <TechStack ref="refTechStack" />
-    <!-- </div> -->
-    <RightMouseButtonMenu ref="menu" />
-    <MyCursor ref="cursor" />
+  <div>
+    <div
+      v-if="load"
+      :style="{ backgroundImage: 'url(' + image + ')' }"
+      class="App"
+      ref="App"
+      v-on="{
+        mousemove: divAppMouseMove,
+        mouseout: divAppMouseOut,
+        contextmenu: divAppContextMenu,
+        click: divAppClick,
+      }"
+    >
+      <NameAndProfession v-on:scrollToPage2="scrollToPage2" />
+      <TechStack ref="refTechStack" />
+      <Protfolio/>
+      <RightMouseButtonMenu ref="menu" />
+      <MyCursor ref="cursor" />
+    </div>
+    <img @load="a" :src="image" alt="" :style="{ display: 'none' }" />
   </div>
 </template>
 
 <script>
+// const myBackgroundImage = require("./aaa.png")
+import myBackgroundImage from "../public/bbbbbbbbbbbbb.png";
 import TechStack from "./components/TechStack";
 import NameAndProfession from "./components/NameAndProfession";
 import MyCursor from "./components/MyCursor";
 import RightMouseButtonMenu from "./components/RightMouseButtonMenu";
+import Protfolio from "./components/Portfolio"
 export default {
   name: "App",
   data() {
     return {
+      load: false,
+      image: null,
       scrollToPage2: () => {
         this.$refs.refTechStack.scrollToPage2();
       },
     };
   },
   methods: {
+    a() {
+      
+        this.load = true;
+        console.log(444);
+     
+    },
     divAppClick() {
       this.$refs.menu.divAppClick();
     },
@@ -58,8 +74,11 @@ export default {
       this.$refs.menu.contextMenu(event);
     },
   },
-
+  mounted() {
+    this.image = myBackgroundImage;
+  },
   components: {
+    Protfolio,
     MyCursor,
     RightMouseButtonMenu,
     NameAndProfession,
@@ -73,45 +92,30 @@ export default {
   html {
     font-size: 10px;
   }
-  /* .technology {
-    transform: scale(2);
-  } */
 }
 
 @media only screen and (min-width: 600px) {
   html {
     font-size: 12px;
   }
-  /* .technology {
-    transform: scale(2);
-  } */
 }
 
 @media only screen and (min-width: 768px) {
   html {
     font-size: 14px;
   }
-  /* .technology {
-    transform: scale(2);
-  } */
 }
 
 @media only screen and (min-width: 992px) {
   html {
     font-size: 16px;
   }
-  /* .technology {
-    transform: scale(2);
-  } */
 }
 
 @media only screen and (min-width: 1200px) {
   html {
     font-size: 18px;
   }
-  /* .technology {
-    transform: scale(2);
-  } */
 }
 body {
   overflow: hidden;
@@ -124,8 +128,8 @@ body {
   overflow: scroll;
   cursor: none;
   overflow-x: hidden;
-  background-image: url("../public/123323423423.png");
-  background-size: 100px;
+  /* background-image: url("../public/background.png"); */
+  /* background-size: 100px; */
   background-repeat: repeat;
   -webkit-print-color-adjust: exact;
   scroll-behavior: smooth;
